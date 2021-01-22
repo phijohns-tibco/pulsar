@@ -43,12 +43,6 @@ jobs:
           fetch-depth: 25
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Check if this pull request only changes documentation
-        id:   docs
-        uses: apache/pulsar-test-infra/diff-only@master
-        with:
-          args: site2 deployment .asf.yaml .ci ct.yaml
-
       - name: Cache local Maven repository
         if: steps.docs.outputs.changed_only == 'no'
         uses: actions/cache@v2
